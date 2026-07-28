@@ -15,3 +15,27 @@ AWN 是一个基于深度学习的结构变异（SV）检测与基因分型框�
 3. 余弦退火学习率调度器：替换原有动态学习率策略，配合热重启，实现更稳健的收敛。
 
 AWN 支持检测以下 SV 类型：DEL、DUP、INV、INVDEL、INVDUP。
+
+####  二、将序列比对信息转换为二维图像
+1. 准备配置文件
+
+复制 config/data1.yaml或者data2.yaml 并按实际情况修改以下关键参数：
+
+bam: "/path/to/your/alignments.sorted.bam"   # 比对文件
+
+fai: "/path/to/reference.fa.fai"             # 参考基因组索引
+
+bed: "/path/to/annotations.vcf"              # SV标注文件
+
+chr_names: ["Chr1A"]                         # 待处理染色体
+
+2. 运行命令
+nohup python /path/to/cue/engine/generate.py \
+
+  --config /path/to/config/data1.yaml \
+  
+  2> generate.log &
+  
+3. 查看输出
+
+生成的图像保存在 ./images/ 目录下，按染色体分类存放。
