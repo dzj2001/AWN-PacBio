@@ -48,3 +48,24 @@ signal_set_origin: "LONG"     # 信号来源：长读长
 #### 图像生成 ####
 
 empty_annotation: False       # True：在图像上显示SV标注框；False：不显示
+
+
+####  四、模型训练
+1. 准备配置文件
+
+复制以下内容创建 train.yaml，按实际情况修改关键参数：
+
+dataset_dirs	训练图像所在目录，即上一步图像生成模块的输出目录
+
+pretrained_model	预训练权重路径，可用于迁移学习或断点续训
+
+gpu_ids	指定训练使用的GPU，多卡可写 [0, 1]
+
+learning_rate	初始学习率，配合余弦退火调度器动态调整
+
+class_set	分类集，"BASIC4" 表示 DEL/DUP/INV 三类
+
+2. 模型训练的指令
+
+nohup python /path/to/cue/engine/train.py --config /path/to/train.yaml > train.log 2>&1 &
+   
