@@ -68,4 +68,30 @@ class_set	分类集，"BASIC4" 表示 DEL/DUP/INV 三类
 2. 模型训练的指令
 
 nohup python /path/to/cue/engine/train.py --config /path/to/train.yaml > train.log 2>&1 &
+
+####  五、模型推理（变异检测）
+
+1. 准备配置文件
+
+创建 data.yaml 指定待检测的比对文件：
+
+bam: "/path/to/input.sorted.bam"      # 待检测的BAM比对文件
+
+fai: "/path/to/reference.fa.fai"      # 参考基因组索引
+
+chr_names: ["Chr1A"]                  # 指定检测的染色体
+
+class_set: "BASIC4"                   # SV类型分类集
+
+n_cpus: 64                            # CPU核心数
+
+创建 model.yaml 指定训练好的模型权重：
+
+model_path: "/path/to/model.pt"       # 训练好的模型权重文件
+
+class_set: "BASIC4"                   # 需与训练时一致
+
+2. 运行推理
+
+nohup python /path/to/cue/engine/call.py --data_config /path/to/data.yaml --model_config /path/to/model.yaml 2> call.log &
    
