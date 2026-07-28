@@ -30,11 +30,7 @@ bed: "/path/to/annotations.vcf"              # SV标注文件
 chr_names: ["Chr1A"]                         # 待处理染色体
 
 2. 运行命令
-nohup python /path/to/cue/engine/generate.py \
-
-  --config /path/to/config/data1.yaml \
-  
-  2> generate.log &
+nohup python /path/to/cue/engine/generate.py --config /path/to/config/data1.yaml 2> generate.log &
   
 3. 查看输出
 
