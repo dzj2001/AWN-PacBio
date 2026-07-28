@@ -17,7 +17,7 @@ AWN 是一个基于深度学习的结构变异（SV）检测与基因分型框�
 AWN 支持检测以下 SV 类型：DEL、DUP、INV、INVDEL、INVDUP。
 
 ####  二、将序列比对信息转换为二维图像
-1. 准备配置文件
+#### 1. 准备配置文件 #### 
 
 复制 config/data1.yaml或者data2.yaml 并按实际情况修改以下关键参数：
 
@@ -29,15 +29,16 @@ bed: "/path/to/annotations.vcf"              # SV标注文件
 
 chr_names: ["Chr1A"]                         # 待处理染色体
 
-2. 运行命令
+#### 2. 运行命令 #### 
 nohup python /path/to/cue/engine/generate.py --config /path/to/config/data1.yaml 2> generate.log &
   
-3. 查看输出
+#### 3. 查看输出 #### 
 
 生成的图像保存在 ./images/ 目录下，按染色体分类存放。
 
-4. 关键配置参数
-#### 固定参数（无需修改） ####
+#### 4. 关键配置参数 #### 
+   
+固定参数（无需修改)
 
 bam_type: "LONG"              # 测序数据类型：长读长（PacBio）
 
@@ -45,13 +46,13 @@ signal_set: "LONG"            # 信号集：长读长信号
 
 signal_set_origin: "LONG"     # 信号来源：长读长
 
-#### 图像生成 ####
+图像生成
 
 empty_annotation: False       # True：在图像上显示SV标注框；False：不显示
 
 
 ####  四、模型训练
-1. 准备配置文件
+#### 1. 准备配置文件 #### 
 
 复制以下内容创建 train.yaml，按实际情况修改关键参数：
 
@@ -65,13 +66,13 @@ learning_rate	初始学习率，配合余弦退火调度器动态调整
 
 class_set	分类集，"BASIC4" 表示 DEL/DUP/INV 三类
 
-2. 模型训练的指令
+#### 2. 模型训练的指令 #### 
 
 nohup python /path/to/cue/engine/train.py --config /path/to/train.yaml > train.log 2>&1 &
 
 ####  五、模型推理（变异检测）
 
-1. 准备配置文件
+#### 1. 准备配置文件 #### 
 
 创建 data.yaml 指定待检测的比对文件：
 
@@ -91,7 +92,7 @@ model_path: "/path/to/model.pt"       # 训练好的模型权重文件
 
 class_set: "BASIC4"                   # 需与训练时一致
 
-2. 运行推理
+####  2. 运行推理 #### 
 
 nohup python /path/to/cue/engine/call.py --data_config /path/to/data.yaml --model_config /path/to/model.yaml 2> call.log &
    
