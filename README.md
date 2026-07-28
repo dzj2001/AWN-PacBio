@@ -39,3 +39,16 @@ nohup python /path/to/cue/engine/generate.py \
 3. 查看输出
 
 生成的图像保存在 ./images/ 目录下，按染色体分类存放。
+
+4. 关键配置参数
+#### 固定参数（无需修改） ####
+
+bam_type: "LONG"              # 测序数据类型：长读长（PacBio）
+
+signal_set: "LONG"            # 信号集：长读长信号
+
+signal_set_origin: "LONG"     # 信号来源：长读长
+
+#### 图像生成 ####
+
+empty_annotation: False       # True：在图像上显示SV标注框；False：不显示
